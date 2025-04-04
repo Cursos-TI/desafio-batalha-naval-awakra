@@ -36,47 +36,51 @@ int main()
     // 0 0 1 0 0
     // 1 1 1 1 1
     // 0 0 1 0 0
+#define TAMANHO_TABULEIRO 10
 
-    int tabuleiro[9][9] = {0}; // Inicializa o tabuleiro com 0
+    int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO] = {0}; // Inicializa o tabuleiro com 0
 
-    // Definição dos navios
-    int navioHorizontal[3] = {0, 1, 2}; // Navio horizontal ocupa 3 posições
-    int navioVertical[3] = {0, 1, 2};   // Navio vertical ocupa 3 posições
+    // Posiciona dois navios na diagonal
+    int linha_diagonal1 = 1, coluna_diagonal1 = 1;
+    int linha_diagonal2 = 6, coluna_diagonal2 = 8;
 
-    // Coordenadas iniciais dos navios
-    int linhaHorizontal = 2;
-    int colunaHorizontal = 3;
-
-    int linhaVertical = 5;
-    int colunaVertical = 7;
-
-    // Posiciona o navio horizontal no tabuleiro
     for (int i = 0; i < 3; i++)
     {
-        tabuleiro[linhaHorizontal][colunaHorizontal + i] = 3;
+        tabuleiro[linha_diagonal1 + i][coluna_diagonal1 + i] = 3;
+        tabuleiro[linha_diagonal2 + i][coluna_diagonal2 - i] = 3;
     }
 
-    // Posiciona o navio vertical no tabuleiro
+    // Posiciona dois navios horizontalmente ou verticalmente
+    int linha_horizontal = 4, coluna_horizontal = 0;
+    int linha_vertical = 8, coluna_vertical = 6;
+
     for (int i = 0; i < 3; i++)
     {
-        tabuleiro[linhaVertical + i][colunaVertical] = 3;
+        tabuleiro[linha_horizontal][coluna_horizontal + i] = 3;
+        tabuleiro[linha_vertical + i][coluna_vertical] = 3;
     }
-
     // Exibe o tabuleiro com os navios posicionados
     printf("TABULEIRO BATALHA NAVAL\n");
-    printf("  "); // Espaço inicial para alinhar os identificadores das colunas
-    for (char col = 'A'; col < 'A' + 9; col++)
+    printf("   "); // Espaço inicial para alinhar os identificadores das colunas
+    for (char col = 'A'; col < 'A' + TAMANHO_TABULEIRO; col++)
     {
         printf("%c ", col); // Imprime os identificadores das colunas
     }
     printf("\n");
 
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < TAMANHO_TABULEIRO; i++)
     {
-        printf("%d ", i + 1); // Imprime o identificador da linha
-        for (int j = 0; j < 9; j++)
+        if (i + 1 <= 9)
         {
-            printf("%d ", tabuleiro[i][j]);
+            printf(" %d ", i + 1);
+        } // Imprime o identificador da linha
+        else
+        {
+            printf("%d ", i + 1);
+        }
+        for (int j = 0; j < TAMANHO_TABULEIRO; j++)
+        {
+            printf("%d ", tabuleiro[i][j]); // Exibe o elemento do tabuleiro
         }
         printf("\n");
     }
